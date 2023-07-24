@@ -41,7 +41,7 @@ export default function DetailsViewScreen(props: DetailsScreenProps) {
   ): JSX.Element => {
     return (
       <View style={[styles.flexRow, styles.flatListItemContainer]}>
-        <EvilIcons name={'play'} size={30} />
+        <EvilIcons name={'play'} size={30} color={'rgb(117,117,117)'}/>
         <TextComponent color="rgb(117,117,117)" size={16} marginx={10}>
           {`Play ${info.item.title}`}
         </TextComponent>

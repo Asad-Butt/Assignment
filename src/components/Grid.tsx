@@ -27,8 +27,8 @@ export default function GridView(props: GridViewProps) {
    return(
     <Pressable onPress={()=> props.onPress(info?.item)}>
     <Image source={{uri: props?.imageUrl + props?.poster_size + '/' + info?.item?.poster_path}} style={styles.poster}/>
-    <TextComponent style={styles.title}>{info?.item?.title}</TextComponent>
-    <TextComponent style={styles.release_date}>{moment(info?.item?.release_date, 'DD-MM-YYYY').format('DD MMM YYYY')}</TextComponent>
+    <TextComponent style={styles.title} color='black'>{info?.item?.title}</TextComponent>
+    <TextComponent style={styles.release_date} color='black'>{moment(info?.item?.release_date, 'DD-MM-YYYY').format('DD MMM YYYY')}</TextComponent>
     </Pressable>
    )
   }
