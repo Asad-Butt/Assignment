@@ -8,6 +8,7 @@ interface HeaderProps {
   styles?: StyleProp<ViewStyle>;
   title: string;
   backable?: boolean;
+  onPressOption?:any;
   hasOptionButton?: boolean;
 }
 export default function Header(props: HeaderProps) {
@@ -22,7 +23,7 @@ export default function Header(props: HeaderProps) {
 
       <Text style={styles.title}>{props.title}</Text>
       {props?.hasOptionButton && (
-        <Pressable style={styles.optionsButton} >
+        <Pressable style={styles.optionsButton} onPress={props.onPressOption}>
           <MaterialCommunityIcons
             name="dots-vertical"
             color="white"

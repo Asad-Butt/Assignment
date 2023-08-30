@@ -7,11 +7,15 @@ import {
   Text,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Header, TextComponent} from '../../../components';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import moment from 'moment';
-import { RouteProp } from '@react-navigation/native';
+import {RouteProp} from '@react-navigation/native';
+import {
+  FavoriteMoviesContext,
+  useFavoriteMovies,
+} from '../../../context/FavoriteMoviesContext';
 interface ListRenderItemInfo<ItemT> {
   item: ItemT;
 }
@@ -21,18 +25,30 @@ type ItemType = {
 };
 
 type RootStackParamList = {
-    Details: {  item: PosterItemModel, imageUrl: string, poster_size: string };
-  };
-  
+  Details: {item: PosterItemModel; imageUrl: string; poster_size: string};
+};
+
 type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
-  
+
 interface DetailsScreenProps {
-    route: DetailsScreenRouteProp
+  route: DetailsScreenRouteProp;
 }
 
 export default function DetailsViewScreen(props: DetailsScreenProps) {
   /** Renderers **/
-  const { item, imageUrl, poster_size } = props.route.params
+  const {item, imageUrl, poster_size} = props.route.params;
+  const {favoriteMovies, setFavoriteMovies} = useFavoriteMovies();
+
+  const addToFavorites = () => {
+    setFavoriteMovies([...favoriteMovies, item]);
+  };
+
+  const removeFromFavorites = () => {
+    setFavoriteMovies(favoriteMovies.filter(movie => movie.id !== item.id));
+  };
+
+  const isFavorite = favoriteMovies.some(favMovie => favMovie.id === item.id);
+
   /**
    * @return {JSX.Element}
    */
@@ -41,7 +57,7 @@ export default function DetailsViewScreen(props: DetailsScreenProps) {
   ): JSX.Element => {
     return (
       <View style={[styles.flexRow, styles.flatListItemContainer]}>
-        <EvilIcons name={'play'} size={30} color={'rgb(117,117,117)'}/>
+        <EvilIcons name={'play'} size={30} color={'rgb(117,117,117)'} />
         <TextComponent color="rgb(117,117,117)" size={16} marginx={10}>
           {`Play ${info.item.title}`}
         </TextComponent>
@@ -72,22 +88,37 @@ export default function DetailsViewScreen(props: DetailsScreenProps) {
             }}>
             <View>
               <TextComponent size={16} color="black">
-              {moment(item?.release_date, 'DD-MM-YYYY').format('YYYY')}
+                {moment(item?.release_date, 'DD-MM-YYYY').format('YYYY')}
               </TextComponent>
               <TextComponent size={14} color="black" marginy={10}>
-              {item?.vote_count} votes
+                {item?.vote_count} votes
               </TextComponent>
             </View>
             <View>
               <TextComponent size={14} color="black" bold marginy={15}>
                 {item?.vote_average}/10
               </TextComponent>
-
-              <Button title={'Add to Favorite'} onPress={() => {}} />
+              {isFavorite ? (
+                <Button
+                  title={'Remove from Favorite'}
+                  onPress={() => {
+                    removeFromFavorites();
+                  }}
+                />
+              ) : (
+                <Button
+                  title={'Add to Favorite'}
+                  onPress={() => {
+                    addToFavorites();
+                  }}
+                />
+              )}
             </View>
           </View>
         </View>
-        <TextComponent size={14} color="black" marginy={30}>{item?.overview}</TextComponent>
+        <TextComponent size={14} color="black" marginy={30}>
+          {item?.overview}
+        </TextComponent>
 
         <TextComponent size={16} color="rgb(117,117,117)" marginy={10} bold>
           TRAILERS

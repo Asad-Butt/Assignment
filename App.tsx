@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import MainNavigator from './src/navigation/MainNavigator';
 import { ApiProvider } from './src/provider/ApiProvider';
+import { FavoriteMoviesProvider } from './src/context/FavoriteMoviesContext';
 
 function App(): JSX.Element {
 
@@ -28,9 +29,11 @@ function App(): JSX.Element {
 
   return (
     <ApiProvider>
+    <FavoriteMoviesProvider>
     <NavigationContainer>
       <MainNavigator/>
     </NavigationContainer>
+    </FavoriteMoviesProvider>
     </ApiProvider>
   );
 }

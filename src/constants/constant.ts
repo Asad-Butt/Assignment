@@ -13,3 +13,4 @@ const ENV = {
   
   export const MAIN_DISCOVERY_SCREEN = 'Main Discovery Screen';
   export const DETAILS_VIEW_SCREEN = 'Details View Screen';
+  export const FAVORITE_SCREEN = 'Favorite Screen'
