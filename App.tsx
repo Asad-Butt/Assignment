@@ -29,11 +29,11 @@ function App(): JSX.Element {
 
   return (
     <ApiProvider>
-    <FavoriteMoviesProvider>
-    <NavigationContainer>
-      <MainNavigator/>
-    </NavigationContainer>
-    </FavoriteMoviesProvider>
+      <FavoriteMoviesProvider>
+        <NavigationContainer>
+          <MainNavigator />
+        </NavigationContainer>
+      </FavoriteMoviesProvider>
     </ApiProvider>
   );
 }
