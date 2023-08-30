@@ -1,4 +1,4 @@
-import React, { useContext,} from 'react';
+import React, { useContext, } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { GridView, Header } from '../../../components';
@@ -7,30 +7,29 @@ import { ApiContext } from '../../../provider/ApiProvider';
 import AppLoading from '../../../components/AppLoading';
 import { DETAILS_VIEW_SCREEN } from '../../../constants/constant';
 type RootStackParamList = {
-    Details: {  allMovies: PosterItemModel,};
-  };
-  
+  Details: { allMovies: PosterItemModel, };
+};
+
 type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
-  
+
 interface DetailsScreenProps {
-    route: DetailsScreenRouteProp
+  route: DetailsScreenRouteProp
 }
 
-export default function FavoritesScreen(props:DetailsScreenProps) {
+export default function FavoritesScreen(props: DetailsScreenProps) {
   const apiContextData = useContext(ApiContext);
   const config = apiContextData?.apiConfig?.images;
   const { favoriteMovies } = useFavoriteMovies();
   const navigation = useNavigation();
-console.log(" fav movies %%%%%%%%%%%%%%%%%%%%%%%",favoriteMovies)
 
-  if (config == undefined  ) {
+  if (config == undefined) {
     return <AppLoading />;
   }
 
   return (
     <FavoriteMoviesProvider>
-    <SafeAreaView style={{flex:1}}>
-      <Header title='Favorites' backable /> 
+      <SafeAreaView style={{ flex: 1 }}>
+        <Header title='Favorites' backable />
         <GridView
           data={favoriteMovies}
           imageUrl={config?.secure_base_url}
@@ -49,7 +48,7 @@ console.log(" fav movies %%%%%%%%%%%%%%%%%%%%%%%",favoriteMovies)
             })
           }
         />
-    </SafeAreaView>
+      </SafeAreaView>
     </FavoriteMoviesProvider>
   );
 }

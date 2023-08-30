@@ -48,8 +48,8 @@ export default function GridView(props: GridViewProps) {
 
 const styles = StyleSheet.create({
     poster: {
-        height: Dimensions.get('screen').height * 0.3,
-        width: Dimensions.get('screen').width * 0.5
+        height: Dimensions.get('screen').height * 0.26,
+        width: Dimensions.get('screen').width * 0.45
     },
     title: {
         fontSize: 14,
