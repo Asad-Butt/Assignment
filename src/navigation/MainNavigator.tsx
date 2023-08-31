@@ -5,6 +5,7 @@ import { DETAILS_VIEW_SCREEN, MAIN_DISCOVERY_SCREEN, FAVORITE_SCREEN } from '../
 import { DetailsViewScreen, MainDiscoveryScreen, FavoriteScreen } from '../screens/home';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MainStackNavigator from './MainStackNavigator';
+import SearchScreen from '../screens/home/Search/SearchScreen';
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,11 +23,16 @@ const Profile = () => (
   <View><Text>Profile Screen</Text></View>
 )
 
+
+
 const MainNavigator = () => (
 
   <Tab.Navigator screenOptions={{ headerShown: false }}>
-    <Tab.Screen name="Home" component={MainStackNavigator} />
+    <Tab.Screen name="Home" component={MainStackNavigator} options={{
+    }} />
     <Tab.Screen name="Favourites" component={Favourites} />
+    <Tab.Screen name="Search" component={SearchScreen} />
+
     <Tab.Screen name="Profile" component={Profile} />
   </Tab.Navigator>
 );
