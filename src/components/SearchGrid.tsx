@@ -1,4 +1,4 @@
-import { Dimensions, FlatList, Image, Pressable, StyleSheet, View } from 'react-native'
+import { Dimensions, FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import TextComponent from './Text';
 import moment from 'moment';
@@ -43,6 +43,7 @@ export default function SearchGrid(props: GridViewProps) {
                 onEndReached={props?.onEndReached}
                 onEndReachedThreshold={0.2}
                 renderItem={renderFlatListItem}
+                ListEmptyComponent={<View className='flex-1 justify-center items-center'><Text>Nothing to show</Text></View>}
             />
         </View>
     )
